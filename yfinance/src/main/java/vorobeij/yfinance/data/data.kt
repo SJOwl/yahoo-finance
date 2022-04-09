@@ -49,7 +49,7 @@ import kotlinx.serialization.Serializable
     @SerialName("auditRisk") val auditRisk: Int,
     @SerialName("boardRisk") val boardRisk: Int,
     @SerialName("city") val city: String,
-    @SerialName("companyOfficers") val compStringOfficers: List<CompStringOfficer>,
+    @SerialName("companyOfficers") val compStringOfficers: List<CompanyOfficer>,
     @SerialName("compensationAsOfEpochDate") val compensationAsOfEpochDate: Int,
     @SerialName("compensationRisk") val compensationRisk: Int,
     @SerialName("country") val country: String,
@@ -410,7 +410,7 @@ data class IncomeStatementHistoryItem(
 @Serializable data class SummaryProfile(
     @SerialName("address1") val address1: String,
     @SerialName("city") val city: String,
-    @SerialName("compStringOfficers") val compStringOfficers: List<String>,
+    @SerialName("companyOfficers") val companyOfficers: List<CompanyOfficer>,
     @SerialName("country") val country: String,
     @SerialName("fullTimeEmployees") val fullTimeEmployees: Int,
     @SerialName("industry") val industry: String,
@@ -424,10 +424,20 @@ data class IncomeStatementHistoryItem(
 )
 
 @Serializable data class UpgradeDowngradeHistory(
-    @SerialName("history") val history: List<History>, @SerialName("maxAge") val maxAge: Int
+    @SerialName("history") val history: List<UpgradeDowngradeHistoryItem>,
+    @SerialName("maxAge") val maxAge: Int
 )
 
-@Serializable data class CompStringOfficer(
+@Serializable
+data class UpgradeDowngradeHistoryItem(
+    @SerialName("action") val action: String,
+    @SerialName("epochGradeDate") val epochGradeDate: Int,
+    @SerialName("firm") val firm: String,
+    @SerialName("fromGrade") val fromGrade: String,
+    @SerialName("toGrade") val toGrade: String
+)
+
+@Serializable data class CompanyOfficer(
     @SerialName("age") val age: Int? = null,
     @SerialName("exercisedValue") val exercisedValue: DataEntry,
     @SerialName("fiscalYear") val fiscalYear: Int? = null,
@@ -491,7 +501,7 @@ data class IncomeStatementHistoryItem(
     @SerialName("dividendsPaid") val dividendsPaid: DataEntry,
     @SerialName("endDate") val endDate: DataEntry,
     @SerialName("investments") val investments: DataEntry,
-    @SerialName("issuanceOfStock") val issuanceOfStock: DataEntry,
+    @SerialName("issuanceOfStock") val issuanceOfStock: DataEntry? = null,
     @SerialName("maxAge") val maxAge: Int,
     @SerialName("netBorrowings") val netBorrowings: DataEntry,
     @SerialName("netIncome") val netIncome: DataEntry,
@@ -512,14 +522,16 @@ data class IncomeStatementHistoryItem(
 )
 
 @Serializable data class FinancialsChart(
-    @SerialName("quarterly") val quarterly: List<Quarterly>, @SerialName("yearly") val yearly: List<Yearly>
+    @SerialName("quarterly") val quarterly: List<Quarterly>,
+    @SerialName("yearly") val yearly: List<Yearly>
 )
 
-
 @Serializable data class Quarterly(
-    @SerialName("actual") val `actual`: DataEntry,
+    @SerialName("actual") val `actual`: DataEntry? = null,
     @SerialName("date") val date: String,
-    @SerialName("estimate") val estimate: DataEntry
+    @SerialName("estimate") val estimate: DataEntry? = null,
+    @SerialName("revenue") val revenue: DataEntry? = null,
+    @SerialName("earnings") val earnings: DataEntry? = null,
 )
 
 @Serializable data class Yearly(
@@ -537,7 +549,6 @@ data class IncomeStatementHistoryItem(
     @SerialName("quarter") val quarter: DataEntry,
     @SerialName("surprisePercent") val surprisePercent: DataEntry
 )
-
 
 @Serializable data class Trend(
     @SerialName("earningsEstimate") val earningsEstimate: EarningsEstimate,
@@ -631,7 +642,7 @@ data class IncomeStatementHistoryItem(
     @SerialName("shares") val shares: DataEntry,
     @SerialName("startDate") val startDate: DataEntry,
     @SerialName("transactionText") val transactionText: String,
-    @SerialName("value") val value: DataEntry
+    @SerialName("value") val value: DataEntry? = null
 )
 
 @Serializable data class Filing(
