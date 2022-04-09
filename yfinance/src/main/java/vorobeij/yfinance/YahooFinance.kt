@@ -14,8 +14,13 @@ private val retrofit = Retrofit.Builder()
 
 interface YahooApi {
 
-    @GET("https://query2.finance.yahoo.com/v10/finance/quoteSummary/{ticker}?modules=incomeStatementHistoryQuarterly")
-    suspend fun quoteSummaryQuarterly(
+    //    @GET("quoteSummary/{ticker}?modules=incomeStatementHistoryQuarterly")
+    //    suspend fun quoteSummaryQuarterly(
+    //        @Path("ticker") ticker: String
+    //    ): QuoteSummaryResponse
+
+    @GET("quoteSummary/{ticker}?modules=assetProfile,balanceSheetHistory,balanceSheetHistoryQuarterly,calendarEvents,cashflowStatementHistory,cashflowStatementHistoryQuarterly,defaultKeyStatistics,earnings,earningsHistory,earningsTrend,financialData,fundOwnership,incomeStatementHistory,incomeStatementHistoryQuarterly,indexTrend,industryTrend,insiderHolders,insiderTransactions,institutionOwnership,majorDirectHolders,majorHoldersBreakdown,netSharePurchaseActivity,price,quoteType,recommendationTrend,secFilings,sectorTrend,summaryDetail,summaryProfile,symbol,upgradeDowngradeHistory,fundProfile,topHoldings,fundPerformance")
+    suspend fun quoteSummary(
         @Path("ticker") ticker: String
     ): QuoteSummaryResponse
 }
@@ -24,6 +29,43 @@ class YahooRepository(
     private val api: YahooApi
 ) {
     suspend fun quoteSummary(ticker: String): QuoteSummary {
-        return api.quoteSummaryQuarterly(ticker).quoteSummary
+        return api.quoteSummary(ticker).quoteSummary
     }
 }
+
+// https://query2.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=
+//
+//assetProfile
+//balanceSheetHistory
+//balanceSheetHistoryQuarterly
+//calendarEvents
+//cashflowStatementHistory
+//cashflowStatementHistoryQuarterly
+//defaultKeyStatistics
+//earnings
+//earningsHistory
+//earningsTrend
+//financialData
+//fundOwnership
+//incomeStatementHistory
+//incomeStatementHistoryQuarterly
+//indexTrend
+//industryTrend
+//insiderHolders
+//insiderTransactions
+//institutionOwnership
+//majorDirectHolders
+//majorHoldersBreakdown
+//netSharePurchaseActivity
+//price
+//quoteType
+//recommendationTrend
+//secFilings
+//sectorTrend
+//summaryDetail
+//summaryProfile
+//symbol
+//upgradeDowngradeHistory
+//fundProfile
+//topHoldings
+//fundPerformance

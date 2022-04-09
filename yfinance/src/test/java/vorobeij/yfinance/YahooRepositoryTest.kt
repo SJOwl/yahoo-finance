@@ -15,7 +15,8 @@ class YahooRepositoryTest {
 
     @ExperimentalSerializationApi companion object {
 
-        private val retrofit = Retrofit.Builder().baseUrl("https://query2.finance.yahoo.com/v10/finance/")
+        private val retrofit = Retrofit.Builder()
+            .baseUrl("https://query2.finance.yahoo.com/v10/finance/")
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .client(
                 OkHttpClient.Builder()
@@ -31,7 +32,7 @@ class YahooRepositoryTest {
     @Test fun `api test`() {
 
         runBlocking {
-            println(yahooRepository.quoteSummary("NVDA"))
+            println(yahooRepository.quoteSummary("AAPL"))
         }
     }
 }
