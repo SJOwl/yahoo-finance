@@ -3,7 +3,6 @@ package vorobeij.yfinance.data
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable data class QuoteSummaryResponse(
     @SerialName("quoteSummary") val quoteSummaryObj: QuoteSummaryObj
 )
@@ -11,10 +10,6 @@ import kotlinx.serialization.Serializable
 @Serializable data class QuoteSummaryObj(
     @SerialName("error") val error: String? = null,
     @SerialName("result") val result: List<Summary>
-)
-
-data class QuoteSummary(
-    val summary: Summary
 )
 
 @Serializable data class Summary(
