@@ -1,154 +1,129 @@
 package vorobeij.yfinance
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.junit.Test
-import retrofit2.Retrofit
-import retrofit2.create
 
 class YahooRepositoryTest {
 
-    @ExperimentalSerializationApi
-    companion object {
-
-        private val retrofit = Retrofit.Builder()
-            .baseUrl("https://query2.finance.yahoo.com/v10/finance/")
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor(HttpLoggingInterceptor().apply {
-                        level = HttpLoggingInterceptor.Level.BASIC
-                    })
-                    .build()
-            ).build()
-        private val api = retrofit.create<YahooApi>()
-        private val yahooRepository = YahooRepository(api)
-    }
-
-    private val ticker: String = "AMZN"
+    private val ticker: String = "MELI"
 
     @Test fun quoteSummary() {
-        runBlocking { println(yahooRepository.quoteSummary(ticker)) }
+        runBlocking { println(YahooFinance.quoteSummary(ticker)) }
     }
 
     @Test fun assetProfile() {
-        runBlocking { println(yahooRepository.assetProfile(ticker)) }
+        runBlocking { println(YahooFinance.assetProfile(ticker)) }
     }
 
     @Test fun balanceSheetHistory() {
-        runBlocking { println(yahooRepository.balanceSheetHistory(ticker)) }
+        runBlocking { println(YahooFinance.balanceSheetHistory(ticker)) }
     }
 
     @Test fun balanceSheetHistoryQuarterly() {
-        runBlocking { println(yahooRepository.balanceSheetHistoryQuarterly(ticker)) }
+        runBlocking { println(YahooFinance.balanceSheetHistoryQuarterly(ticker)) }
     }
 
     @Test fun calendarEvents() {
-        runBlocking { println(yahooRepository.calendarEvents(ticker)) }
+        runBlocking { println(YahooFinance.calendarEvents(ticker)) }
     }
 
     @Test fun cashflowStatementHistory() {
-        runBlocking { println(yahooRepository.cashflowStatementHistory(ticker)) }
+        runBlocking { println(YahooFinance.cashflowStatementHistory(ticker)) }
     }
 
     @Test fun cashflowStatementHistoryQuarterly() {
-        runBlocking { println(yahooRepository.cashflowStatementHistoryQuarterly(ticker)) }
+        runBlocking { println(YahooFinance.cashflowStatementHistoryQuarterly(ticker)) }
     }
 
     @Test fun defaultKeyStatistics() {
-        runBlocking { println(yahooRepository.defaultKeyStatistics(ticker)) }
+        runBlocking { println(YahooFinance.defaultKeyStatistics(ticker)) }
     }
 
     @Test fun earnings() {
-        runBlocking { println(yahooRepository.earnings(ticker)) }
+        runBlocking { println(YahooFinance.earnings(ticker)) }
     }
 
     @Test fun earningsHistory() {
-        runBlocking { println(yahooRepository.earningsHistory(ticker)) }
+        runBlocking { println(YahooFinance.earningsHistory(ticker)) }
     }
 
     @Test fun earningsTrend() {
-        runBlocking { println(yahooRepository.earningsTrend(ticker)) }
+        runBlocking { println(YahooFinance.earningsTrend(ticker)) }
     }
 
     @Test fun financialData() {
-        runBlocking { println(yahooRepository.financialData(ticker)) }
+        runBlocking { println(YahooFinance.financialData(ticker)) }
     }
 
     @Test fun fundOwnership() {
-        runBlocking { println(yahooRepository.fundOwnership(ticker)) }
+        runBlocking { println(YahooFinance.fundOwnership(ticker)) }
     }
 
     @Test fun incomeStatementHistory() {
-        runBlocking { println(yahooRepository.incomeStatementHistory(ticker)) }
+        runBlocking { println(YahooFinance.incomeStatementHistory(ticker)) }
     }
 
     @Test fun incomeStatementHistoryQuarterly() {
-        runBlocking { println(yahooRepository.incomeStatementHistoryQuarterly(ticker)) }
+        runBlocking { println(YahooFinance.incomeStatementHistoryQuarterly(ticker)) }
     }
 
     @Test fun indexTrend() {
-        runBlocking { println(yahooRepository.indexTrend(ticker)) }
+        runBlocking { println(YahooFinance.indexTrend(ticker)) }
     }
 
     @Test fun industryTrend() {
-        runBlocking { println(yahooRepository.industryTrend(ticker)) }
+        runBlocking { println(YahooFinance.industryTrend(ticker)) }
     }
 
     @Test fun insiderHolders() {
-        runBlocking { println(yahooRepository.insiderHolders(ticker)) }
+        runBlocking { println(YahooFinance.insiderHolders(ticker)) }
     }
 
     @Test fun insiderTransactions() {
-        runBlocking { println(yahooRepository.insiderTransactions(ticker)) }
+        runBlocking { println(YahooFinance.insiderTransactions(ticker)) }
     }
 
     @Test fun institutionOwnership() {
-        runBlocking { println(yahooRepository.institutionOwnership(ticker)) }
+        runBlocking { println(YahooFinance.institutionOwnership(ticker)) }
     }
 
     @Test fun majorDirectHolders() {
-        runBlocking { println(yahooRepository.majorDirectHolders(ticker)) }
+        runBlocking { println(YahooFinance.majorDirectHolders(ticker)) }
     }
 
     @Test fun majorHoldersBreakdown() {
-        runBlocking { println(yahooRepository.majorHoldersBreakdown(ticker)) }
+        runBlocking { println(YahooFinance.majorHoldersBreakdown(ticker)) }
     }
 
     @Test fun netSharePurchaseActivity() {
-        runBlocking { println(yahooRepository.netSharePurchaseActivity(ticker)) }
+        runBlocking { println(YahooFinance.netSharePurchaseActivity(ticker)) }
     }
 
     @Test fun price() {
-        runBlocking { println(yahooRepository.price(ticker)) }
+        runBlocking { println(YahooFinance.price(ticker)) }
     }
 
     @Test fun quoteType() {
-        runBlocking { println(yahooRepository.quoteType(ticker)) }
+        runBlocking { println(YahooFinance.quoteType(ticker)) }
     }
 
     @Test fun recommendationTrend() {
-        runBlocking { println(yahooRepository.recommendationTrend(ticker)) }
+        runBlocking { println(YahooFinance.recommendationTrend(ticker)) }
     }
 
     @Test fun secFilings() {
-        runBlocking { println(yahooRepository.secFilings(ticker)) }
+        runBlocking { println(YahooFinance.secFilings(ticker)) }
     }
 
     @Test fun sectorTrend() {
-        runBlocking { println(yahooRepository.sectorTrend(ticker)) }
+        runBlocking { println(YahooFinance.sectorTrend(ticker)) }
     }
 
     @Test fun summaryDetail() {
-        runBlocking { println(yahooRepository.summaryDetail(ticker)) }
+        runBlocking { println(YahooFinance.summaryDetail(ticker)) }
     }
 
     @Test fun upgradeDowngradeHistory() {
-        runBlocking { println(yahooRepository.upgradeDowngradeHistory(ticker)) }
+        runBlocking { println(YahooFinance.upgradeDowngradeHistory(ticker)) }
     }
 }

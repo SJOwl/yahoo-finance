@@ -178,5 +178,4 @@ interface YahooApi {
     suspend fun fundPerformance(
         @Path("ticker") ticker: String
     ): QuoteSummaryResponse
-
 }
