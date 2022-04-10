@@ -1,6 +1,8 @@
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version "1.6.10"
+    `maven-publish`
+    signing
 }
 
 group = "vorobeij"
@@ -21,4 +23,20 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     testImplementation("junit:junit:4.13.2")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "ru.vorobeij"
+            artifactId = "yfinance"
+            version = "1.0"
+
+            from(components["java"])
+        }
+    }
+}
+
+signing {
+    sign(publishing.publications["maven"])
 }
