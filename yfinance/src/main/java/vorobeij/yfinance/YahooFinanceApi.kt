@@ -26,7 +26,7 @@ import vorobeij.yfinance.data.Summary
 import vorobeij.yfinance.data.SummaryDetail
 import vorobeij.yfinance.data.UpgradeDowngradeHistory
 
-interface IYahooRepository {
+internal interface YahooFinanceApi {
 
     suspend fun quoteSummary(ticker: String, refresh: Boolean = true): Summary
 

@@ -1,8 +1,8 @@
-package vorobeij.yfinance
+package vorobeij.yfinance.cache
 
 import java.io.File
 
-class YahooCache {
+class NetworkFileCache : NetworkCache {
 
     private val root = "./cache"
 
@@ -10,12 +10,12 @@ class YahooCache {
         File(root).mkdirs()
     }
 
-    fun get(key: String): String? {
+    override fun getJsonString(key: String): String? {
         val f = file(key)
         return if (f.exists()) f.readText() else null
     }
 
-    fun save(key: String, json: String) {
+    override fun saveJsonString(key: String, json: String) {
         file(key).writeText(json)
     }
 

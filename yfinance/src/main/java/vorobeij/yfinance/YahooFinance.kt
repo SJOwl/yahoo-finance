@@ -5,6 +5,8 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.create
+import vorobeij.yfinance.cache.NetworkCache
+import vorobeij.yfinance.cache.NetworkFileCache
 
 private const val BASE_URL = "https://query2.finance.yahoo.com/v10/finance/"
 
@@ -13,5 +15,8 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
     .build()
 
-object YahooFinance : IYahooRepository by YahooRepository(retrofit.create())
+private val api = retrofit.create<YahooApi>()
 
+class YahooFinance(
+    cache: NetworkCache = NetworkFileCache()
+) : YahooFinanceApi by YahooRepository(api, cache)

@@ -5,125 +5,127 @@ import org.junit.Test
 
 class YahooRepositoryTest {
 
-    private val ticker: String = "MELI"
+    private val ticker: String = "AMZN"
+
+    private val yahooFinance = YahooFinance()
 
     @Test fun quoteSummary() {
-        runBlocking { println(YahooFinance.quoteSummary(ticker)) }
+        runBlocking { println(yahooFinance.quoteSummary(ticker)) }
     }
 
     @Test fun assetProfile() {
-        runBlocking { println(YahooFinance.assetProfile(ticker)) }
+        runBlocking { println(yahooFinance.assetProfile(ticker)) }
     }
 
     @Test fun balanceSheetHistory() {
-        runBlocking { println(YahooFinance.balanceSheetHistory(ticker)) }
+        runBlocking { println(yahooFinance.balanceSheetHistory(ticker)) }
     }
 
     @Test fun balanceSheetHistoryQuarterly() {
-        runBlocking { println(YahooFinance.balanceSheetHistoryQuarterly(ticker)) }
+        runBlocking { println(yahooFinance.balanceSheetHistoryQuarterly(ticker)) }
     }
 
     @Test fun calendarEvents() {
-        runBlocking { println(YahooFinance.calendarEvents(ticker)) }
+        runBlocking { println(yahooFinance.calendarEvents(ticker)) }
     }
 
     @Test fun cashflowStatementHistory() {
-        runBlocking { println(YahooFinance.cashflowStatementHistory(ticker)) }
+        runBlocking { println(yahooFinance.cashflowStatementHistory(ticker)) }
     }
 
     @Test fun cashflowStatementHistoryQuarterly() {
-        runBlocking { println(YahooFinance.cashflowStatementHistoryQuarterly(ticker)) }
+        runBlocking { println(yahooFinance.cashflowStatementHistoryQuarterly(ticker)) }
     }
 
     @Test fun defaultKeyStatistics() {
-        runBlocking { println(YahooFinance.defaultKeyStatistics(ticker)) }
+        runBlocking { println(yahooFinance.defaultKeyStatistics(ticker)) }
     }
 
     @Test fun earnings() {
-        runBlocking { println(YahooFinance.earnings(ticker)) }
+        runBlocking { println(yahooFinance.earnings(ticker)) }
     }
 
     @Test fun earningsHistory() {
-        runBlocking { println(YahooFinance.earningsHistory(ticker)) }
+        runBlocking { println(yahooFinance.earningsHistory(ticker)) }
     }
 
     @Test fun earningsTrend() {
-        runBlocking { println(YahooFinance.earningsTrend(ticker)) }
+        runBlocking { println(yahooFinance.earningsTrend(ticker)) }
     }
 
     @Test fun financialData() {
-        runBlocking { println(YahooFinance.financialData(ticker)) }
+        runBlocking { println(yahooFinance.financialData(ticker)) }
     }
 
     @Test fun fundOwnership() {
-        runBlocking { println(YahooFinance.fundOwnership(ticker)) }
+        runBlocking { println(yahooFinance.fundOwnership(ticker)) }
     }
 
     @Test fun incomeStatementHistory() {
-        runBlocking { println(YahooFinance.incomeStatementHistory(ticker)) }
+        runBlocking { println(yahooFinance.incomeStatementHistory(ticker)) }
     }
 
     @Test fun incomeStatementHistoryQuarterly() {
-        runBlocking { println(YahooFinance.incomeStatementHistoryQuarterly(ticker)) }
+        runBlocking { println(yahooFinance.incomeStatementHistoryQuarterly(ticker)) }
     }
 
     @Test fun indexTrend() {
-        runBlocking { println(YahooFinance.indexTrend(ticker)) }
+        runBlocking { println(yahooFinance.indexTrend(ticker)) }
     }
 
     @Test fun industryTrend() {
-        runBlocking { println(YahooFinance.industryTrend(ticker)) }
+        runBlocking { println(yahooFinance.industryTrend(ticker)) }
     }
 
     @Test fun insiderHolders() {
-        runBlocking { println(YahooFinance.insiderHolders(ticker)) }
+        runBlocking { println(yahooFinance.insiderHolders(ticker)) }
     }
 
     @Test fun insiderTransactions() {
-        runBlocking { println(YahooFinance.insiderTransactions(ticker)) }
+        runBlocking { println(yahooFinance.insiderTransactions(ticker)) }
     }
 
     @Test fun institutionOwnership() {
-        runBlocking { println(YahooFinance.institutionOwnership(ticker)) }
+        runBlocking { println(yahooFinance.institutionOwnership(ticker)) }
     }
 
     @Test fun majorDirectHolders() {
-        runBlocking { println(YahooFinance.majorDirectHolders(ticker)) }
+        runBlocking { println(yahooFinance.majorDirectHolders(ticker)) }
     }
 
     @Test fun majorHoldersBreakdown() {
-        runBlocking { println(YahooFinance.majorHoldersBreakdown(ticker)) }
+        runBlocking { println(yahooFinance.majorHoldersBreakdown(ticker)) }
     }
 
     @Test fun netSharePurchaseActivity() {
-        runBlocking { println(YahooFinance.netSharePurchaseActivity(ticker)) }
+        runBlocking { println(yahooFinance.netSharePurchaseActivity(ticker)) }
     }
 
     @Test fun price() {
-        runBlocking { println(YahooFinance.price(ticker)) }
+        runBlocking { println(yahooFinance.price(ticker)) }
     }
 
     @Test fun quoteType() {
-        runBlocking { println(YahooFinance.quoteType(ticker)) }
+        runBlocking { println(yahooFinance.quoteType(ticker)) }
     }
 
     @Test fun recommendationTrend() {
-        runBlocking { println(YahooFinance.recommendationTrend(ticker)) }
+        runBlocking { println(yahooFinance.recommendationTrend(ticker)) }
     }
 
     @Test fun secFilings() {
-        runBlocking { println(YahooFinance.secFilings(ticker)) }
+        runBlocking { println(yahooFinance.secFilings(ticker)) }
     }
 
     @Test fun sectorTrend() {
-        runBlocking { println(YahooFinance.sectorTrend(ticker)) }
+        runBlocking { println(yahooFinance.sectorTrend(ticker)) }
     }
 
     @Test fun summaryDetail() {
-        runBlocking { println(YahooFinance.summaryDetail(ticker)) }
+        runBlocking { println(yahooFinance.summaryDetail(ticker)) }
     }
 
     @Test fun upgradeDowngradeHistory() {
-        runBlocking { println(YahooFinance.upgradeDowngradeHistory(ticker)) }
+        runBlocking { println(yahooFinance.upgradeDowngradeHistory(ticker)) }
     }
 }

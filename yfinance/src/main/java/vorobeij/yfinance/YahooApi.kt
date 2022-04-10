@@ -4,7 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import vorobeij.yfinance.data.QuoteSummaryResponse
 
-interface YahooApi {
+internal interface YahooApi {
 
     @GET("quoteSummary/{ticker}?modules=assetProfile,balanceSheetHistory,balanceSheetHistoryQuarterly,calendarEvents,cashflowStatementHistory,cashflowStatementHistoryQuarterly,defaultKeyStatistics,earnings,earningsHistory,earningsTrend,financialData,fundOwnership,incomeStatementHistory,incomeStatementHistoryQuarterly,indexTrend,industryTrend,insiderHolders,insiderTransactions,institutionOwnership,majorDirectHolders,majorHoldersBreakdown,netSharePurchaseActivity,price,quoteType,recommendationTrend,secFilings,sectorTrend,summaryDetail,summaryProfile,symbol,upgradeDowngradeHistory,fundProfile,topHoldings,fundPerformance")
     suspend fun quoteSummary(@Path("ticker") ticker: String): QuoteSummaryResponse

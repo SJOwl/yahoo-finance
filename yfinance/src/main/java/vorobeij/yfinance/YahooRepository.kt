@@ -3,6 +3,7 @@ package vorobeij.yfinance
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import vorobeij.yfinance.cache.NetworkCache
 import vorobeij.yfinance.data.AssetProfile
 import vorobeij.yfinance.data.BalanceSheetHistory
 import vorobeij.yfinance.data.CalendarEvents
@@ -29,11 +30,10 @@ import vorobeij.yfinance.data.Summary
 import vorobeij.yfinance.data.SummaryDetail
 import vorobeij.yfinance.data.UpgradeDowngradeHistory
 
-class YahooRepository(
-    private val api: YahooApi
-) : IYahooRepository {
-
-    private val cache = YahooCache()
+internal class YahooRepository(
+    private val api: YahooApi,
+    private val cache: NetworkCache
+) : YahooFinanceApi {
 
     override suspend fun quoteSummary(ticker: String, refresh: Boolean): Summary {
         return getData("$ticker-quoteSummary", refresh) {
@@ -216,13 +216,13 @@ class YahooRepository(
     private inline fun <reified T> getData(key: String, refresh: Boolean, fetch: () -> T): T {
         return if (refresh) {
             fetch.invoke().also {
-                cache.save(key, Json.encodeToString(it))
+                cache.saveJsonString(key, Json.encodeToString(it))
             }
         } else {
-            cache.get(key)
+            cache.getJsonString(key)
                 ?.let { Json.decodeFromString(it) }
                 ?: fetch.invoke().also {
-                    cache.save(key, Json.encodeToString(it))
+                    cache.saveJsonString(key, Json.encodeToString(it))
                 }
         }
     }
