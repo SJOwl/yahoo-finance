@@ -294,7 +294,7 @@ import kotlinx.serialization.Serializable
     @SerialName("postMarketChangePercent") val postMarketChangePercent: DataEntry? = null,
     @SerialName("postMarketPrice") val postMarketPrice: DataEntry? = null,
     @SerialName("postMarketSource") val postMarketSource: String? = null,
-    @SerialName("postMarketTime") val postMarketTime: Int,
+    @SerialName("postMarketTime") val postMarketTime: Int? = null,
     @SerialName("preMarketChange") val preMarketChange: DataEntry? = null,
     @SerialName("preMarketPrice") val preMarketPrice: DataEntry? = null,
     @SerialName("preMarketSource") val preMarketSource: String? = null,
@@ -495,7 +495,7 @@ import kotlinx.serialization.Serializable
     @SerialName("repurchaseOfStock") val repurchaseOfStock: DataEntry? = null,
     @SerialName("totalCashFromFinancingActivities") val totalCashFromFinancingActivities: DataEntry? = null,
     @SerialName("totalCashFromOperatingActivities") val totalCashFromOperatingActivities: DataEntry? = null,
-    @SerialName("totalCashflowsFromInvestingActivities") val totalCashflowsFromInvestingActivities: DataEntry
+    @SerialName("totalCashflowsFromInvestingActivities") val totalCashflowsFromInvestingActivities: DataEntry? = null
 )
 
 @Serializable data class EarningsChart(
@@ -521,7 +521,7 @@ import kotlinx.serialization.Serializable
 @Serializable data class Yearly(
     @SerialName("date") val date: Int,
     @SerialName("earnings") val earnings: DataEntry? = null,
-    @SerialName("revenue") val revenue: DataEntry
+    @SerialName("revenue") val revenue: DataEntry? = null
 )
 
 @Serializable data class History(
