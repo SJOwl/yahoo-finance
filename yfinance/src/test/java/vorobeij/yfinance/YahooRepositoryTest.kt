@@ -30,7 +30,7 @@ class YahooRepositoryTest {
         private val yahooRepository = YahooRepository(api)
     }
 
-    private val ticker: String = "AAPL"
+    private val ticker: String = "AMZN"
 
     @Test fun quoteSummary() {
         runBlocking { println(yahooRepository.quoteSummary(ticker)) }
@@ -146,10 +146,6 @@ class YahooRepositoryTest {
 
     @Test fun summaryDetail() {
         runBlocking { println(yahooRepository.summaryDetail(ticker)) }
-    }
-
-    @Test fun summaryProfile() {
-        runBlocking { println(yahooRepository.summaryProfile(ticker)) }
     }
 
     @Test fun upgradeDowngradeHistory() {

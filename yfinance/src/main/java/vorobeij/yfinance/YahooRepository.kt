@@ -27,7 +27,6 @@ import vorobeij.yfinance.data.RecommendationTrend
 import vorobeij.yfinance.data.SecFilings
 import vorobeij.yfinance.data.Summary
 import vorobeij.yfinance.data.SummaryDetail
-import vorobeij.yfinance.data.SummaryProfile
 import vorobeij.yfinance.data.UpgradeDowngradeHistory
 
 class YahooRepository(
@@ -205,12 +204,6 @@ class YahooRepository(
     suspend fun summaryDetail(ticker: String, refresh: Boolean = false): SummaryDetail {
         return getData("$ticker-SummaryDetail", refresh) {
             api.summaryDetail(ticker).quoteSummaryObj.result[0].summaryDetail!!
-        }
-    }
-
-    suspend fun summaryProfile(ticker: String, refresh: Boolean = false): SummaryProfile {
-        return getData("$ticker-SummaryProfile", refresh) {
-            api.summaryProfile(ticker).quoteSummaryObj.result[0].summaryProfile!!
         }
     }
 
