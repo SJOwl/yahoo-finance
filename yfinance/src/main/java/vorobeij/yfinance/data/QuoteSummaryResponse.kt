@@ -3,46 +3,51 @@ package vorobeij.yfinance.data
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable data class QuoteSummaryResponse(
-    @SerialName("quoteSummary") val quoteSummary: QuoteSummary
+    @SerialName("quoteSummary") val quoteSummaryObj: QuoteSummaryObj
 )
 
-@Serializable data class QuoteSummary(
-    @SerialName("error") val error: String?,
-    @SerialName("result") val result: List<Result>
+@Serializable data class QuoteSummaryObj(
+    @SerialName("error") val error: String? = null,
+    @SerialName("result") val result: List<Summary>
 )
 
-@Serializable data class Result(
-    @SerialName("assetProfile") val assetProfile: AssetProfile,
-    @SerialName("balanceSheetHistory") val balanceSheetHistory: BalanceSheetHistory,
-    @SerialName("balanceSheetHistoryQuarterly") val balanceSheetHistoryQuarterly: BalanceSheetHistory,
-    @SerialName("calendarEvents") val calendarEvents: CalendarEvents,
-    @SerialName("cashflowStatementHistory") val cashflowStatementHistory: CashflowStatementHistory,
-    @SerialName("cashflowStatementHistoryQuarterly") val cashflowStatementHistoryQuarterly: CashflowStatementHistory,
-    @SerialName("defaultKeyStatistics") val defaultKeyStatistics: DefaultKeyStatistics,
-    @SerialName("earnings") val earnings: EarningsX,
-    @SerialName("earningsHistory") val earningsHistory: EarningsHistory,
-    @SerialName("earningsTrend") val earningsTrend: EarningsTrend,
-    @SerialName("financialData") val financialData: FinancialData,
-    @SerialName("fundOwnership") val fundOwnership: FundOwnership,
-    @SerialName("incomeStatementHistory") val incomeStatementHistory: IncomeStatementHistory,
-    @SerialName("incomeStatementHistoryQuarterly") val incomeStatementHistoryQuarterly: IncomeStatementHistory,
-    @SerialName("indexTrend") val indexTrend: IndexTrend,
-    @SerialName("industryTrend") val industryTrend: IndexTrend,
-    @SerialName("insiderHolders") val insiderHolders: InsiderHolders,
-    @SerialName("insiderTransactions") val insiderTransactions: InsiderTransactions,
-    @SerialName("institutionOwnership") val institutionOwnership: InstitutionOwnership,
-    @SerialName("majorDirectHolders") val majorDirectHolders: MajorDirectHolders,
-    @SerialName("majorHoldersBreakdown") val majorHoldersBreakdown: MajorHoldersBreakdown,
-    @SerialName("netSharePurchaseActivity") val netSharePurchaseActivity: NetSharePurchaseActivity,
-    @SerialName("price") val price: Price,
-    @SerialName("quoteType") val quoteType: QuoteType,
-    @SerialName("recommendationTrend") val recommendationTrend: RecommendationTrend,
-    @SerialName("secFilings") val secFilings: SecFilings,
-    @SerialName("sectorTrend") val sectorTrend: IndexTrend,
-    @SerialName("summaryDetail") val summaryDetail: SummaryDetail,
-    @SerialName("summaryProfile") val summaryProfile: SummaryProfile,
-    @SerialName("upgradeDowngradeHistory") val upgradeDowngradeHistory: UpgradeDowngradeHistory
+data class QuoteSummary(
+    val summary: Summary
+)
+
+@Serializable data class Summary(
+    @SerialName("assetProfile") val assetProfile: AssetProfile? = null,
+    @SerialName("balanceSheetHistory") val balanceSheetHistory: BalanceSheetHistory? = null,
+    @SerialName("balanceSheetHistoryQuarterly") val balanceSheetHistoryQuarterly: BalanceSheetHistory? = null,
+    @SerialName("calendarEvents") val calendarEvents: CalendarEvents? = null,
+    @SerialName("cashflowStatementHistory") val cashflowStatementHistory: CashflowStatementHistory? = null,
+    @SerialName("cashflowStatementHistoryQuarterly") val cashflowStatementHistoryQuarterly: CashflowStatementHistory? = null,
+    @SerialName("defaultKeyStatistics") val defaultKeyStatistics: DefaultKeyStatistics? = null,
+    @SerialName("earnings") val earnings: EarningsOverview? = null,
+    @SerialName("earningsHistory") val earningsHistory: EarningsHistory? = null,
+    @SerialName("earningsTrend") val earningsTrend: EarningsTrend? = null,
+    @SerialName("financialData") val financialData: FinancialData? = null,
+    @SerialName("fundOwnership") val fundOwnership: FundOwnership? = null,
+    @SerialName("incomeStatementHistory") val incomeStatementHistory: IncomeStatementHistory? = null,
+    @SerialName("incomeStatementHistoryQuarterly") val incomeStatementHistoryQuarterly: IncomeStatementHistory? = null,
+    @SerialName("indexTrend") val indexTrend: IndexTrend? = null,
+    @SerialName("industryTrend") val industryTrend: IndexTrend? = null,
+    @SerialName("insiderHolders") val insiderHolders: InsiderHolders? = null,
+    @SerialName("insiderTransactions") val insiderTransactions: InsiderTransactions? = null,
+    @SerialName("institutionOwnership") val institutionOwnership: InstitutionOwnership? = null,
+    @SerialName("majorDirectHolders") val majorDirectHolders: MajorDirectHolders? = null,
+    @SerialName("majorHoldersBreakdown") val majorHoldersBreakdown: MajorHoldersBreakdown? = null,
+    @SerialName("netSharePurchaseActivity") val netSharePurchaseActivity: NetSharePurchaseActivity? = null,
+    @SerialName("price") val price: Price? = null,
+    @SerialName("quoteType") val quoteType: QuoteType? = null,
+    @SerialName("recommendationTrend") val recommendationTrend: RecommendationTrend? = null,
+    @SerialName("secFilings") val secFilings: SecFilings? = null,
+    @SerialName("sectorTrend") val sectorTrend: IndexTrend? = null,
+    @SerialName("summaryDetail") val summaryDetail: SummaryDetail? = null,
+    @SerialName("summaryProfile") val summaryProfile: SummaryProfile? = null,
+    @SerialName("upgradeDowngradeHistory") val upgradeDowngradeHistory: UpgradeDowngradeHistory? = null
 )
 
 @Serializable data class AssetProfile(
@@ -141,7 +146,7 @@ import kotlinx.serialization.Serializable
     @SerialName("ytdReturn") val ytdReturn: DataEntry
 )
 
-@Serializable data class EarningsX(
+@Serializable data class EarningsOverview(
     @SerialName("earningsChart") val earningsChart: EarningsChart,
     @SerialName("financialCurrency") val financialCurrency: String,
     @SerialName("financialsChart") val financialsChart: FinancialsChart,

@@ -1,14 +1,9 @@
 package vorobeij.yfinance
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
-import vorobeij.yfinance.data.QuoteSummary
 import vorobeij.yfinance.data.QuoteSummaryResponse
-import java.io.File
 
 object YahooFinance {
 
@@ -18,94 +13,50 @@ private val retrofit = Retrofit.Builder()
 
 interface YahooApi {
 
-    //    @GET("quoteSummary/{ticker}?modules=incomeStatementHistoryQuarterly")
-    //    suspend fun quoteSummaryQuarterly(
-    //        @Path("ticker") ticker: String
-    //    ): QuoteSummaryResponse
-
     @GET("quoteSummary/{ticker}?modules=assetProfile,balanceSheetHistory,balanceSheetHistoryQuarterly,calendarEvents,cashflowStatementHistory,cashflowStatementHistoryQuarterly,defaultKeyStatistics,earnings,earningsHistory,earningsTrend,financialData,fundOwnership,incomeStatementHistory,incomeStatementHistoryQuarterly,indexTrend,industryTrend,insiderHolders,insiderTransactions,institutionOwnership,majorDirectHolders,majorHoldersBreakdown,netSharePurchaseActivity,price,quoteType,recommendationTrend,secFilings,sectorTrend,summaryDetail,summaryProfile,symbol,upgradeDowngradeHistory,fundProfile,topHoldings,fundPerformance")
-    suspend fun quoteSummary(
+    suspend fun quoteSummary(@Path("ticker") ticker: String): QuoteSummaryResponse
+
+    @GET("quoteSummary/{ticker}?modules=assetProfile") suspend fun assetProfile(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=balanceSheetHistory") suspend fun balanceSheetHistory(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=balanceSheetHistoryQuarterly") suspend fun balanceSheetHistoryQuarterly(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=calendarEvents") suspend fun calendarEvents(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=cashflowStatementHistory") suspend fun cashflowStatementHistory(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=cashflowStatementHistoryQuarterly") suspend fun cashflowStatementHistoryQuarterly(
         @Path("ticker") ticker: String
     ): QuoteSummaryResponse
+
+    @GET("quoteSummary/{ticker}?modules=defaultKeyStatistics") suspend fun defaultKeyStatistics(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=earnings") suspend fun earnings(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=earningsHistory") suspend fun earningsHistory(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=earningsTrend") suspend fun earningsTrend(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=financialData") suspend fun financialData(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=fundOwnership") suspend fun fundOwnership(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=incomeStatementHistory") suspend fun incomeStatementHistory(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=incomeStatementHistoryQuarterly") suspend fun incomeStatementHistoryQuarterly(
+        @Path(
+            "ticker"
+        ) ticker: String
+    ): QuoteSummaryResponse
+
+    @GET("quoteSummary/{ticker}?modules=indexTrend") suspend fun indexTrend(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=industryTrend") suspend fun industryTrend(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=insiderHolders") suspend fun insiderHolders(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=insiderTransactions") suspend fun insiderTransactions(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=institutionOwnership") suspend fun institutionOwnership(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=majorDirectHolders") suspend fun majorDirectHolders(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=majorHoldersBreakdown") suspend fun majorHoldersBreakdown(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=netSharePurchaseActivity") suspend fun netSharePurchaseActivity(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=price") suspend fun price(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=quoteType") suspend fun quoteType(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=recommendationTrend") suspend fun recommendationTrend(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=secFilings") suspend fun secFilings(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=sectorTrend") suspend fun sectorTrend(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=summaryDetail") suspend fun summaryDetail(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=summaryProfile") suspend fun summaryProfile(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=symbol") suspend fun symbol(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=upgradeDowngradeHistory") suspend fun upgradeDowngradeHistory(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=fundProfile") suspend fun fundProfile(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=topHoldings") suspend fun topHoldings(@Path("ticker") ticker: String): QuoteSummaryResponse
+    @GET("quoteSummary/{ticker}?modules=fundPerformance") suspend fun fundPerformance(@Path("ticker") ticker: String): QuoteSummaryResponse
+
 }
-
-class YahooRepository(
-    private val api: YahooApi
-) {
-
-    private val cache = YahooCache()
-
-    suspend fun quoteSummary(ticker: String, refresh: Boolean = false): QuoteSummary {
-        return getData("quoteSummary-$ticker", refresh) {
-            api.quoteSummary(ticker).quoteSummary
-        }
-    }
-
-    private inline fun <reified T> getData(key: String, refresh: Boolean, fetch: () -> T): T {
-        return if (refresh) {
-            fetch.invoke()
-        } else cache.get(key)?.let { Json.decodeFromString<T>(it) }
-            ?: fetch.invoke().also {
-                cache.save(key, Json.encodeToString(it))
-            }
-    }
-}
-
-class YahooCache {
-
-    private val root = "./cache"
-
-    init {
-        File(root).mkdirs()
-    }
-
-    fun get(key: String): String? {
-        val f = file(key)
-        return if (f.exists()) f.readText() else null
-    }
-
-    fun save(key: String, json: String) {
-        file(key).writeText(json)
-    }
-
-    private fun file(key: String): File {
-        return File(root, key)
-    }
-}
-
-// https://query2.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=
-//
-//assetProfile
-//balanceSheetHistory
-//balanceSheetHistoryQuarterly
-//calendarEvents
-//cashflowStatementHistory
-//cashflowStatementHistoryQuarterly
-//defaultKeyStatistics
-//earnings
-//earningsHistory
-//earningsTrend
-//financialData
-//fundOwnership
-//incomeStatementHistory
-//incomeStatementHistoryQuarterly
-//indexTrend
-//industryTrend
-//insiderHolders
-//insiderTransactions
-//institutionOwnership
-//majorDirectHolders
-//majorHoldersBreakdown
-//netSharePurchaseActivity
-//price
-//quoteType
-//recommendationTrend
-//secFilings
-//sectorTrend
-//summaryDetail
-//summaryProfile
-//symbol
-//upgradeDowngradeHistory
-//fundProfile
-//topHoldings
-//fundPerformance
