@@ -20,6 +20,6 @@ class NetworkFileCache : NetworkCache {
     }
 
     private fun file(key: String): File {
-        return File(root, key)
+        return File(root, "$key.json")
     }
 }

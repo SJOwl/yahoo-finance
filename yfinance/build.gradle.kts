@@ -2,7 +2,6 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version "1.6.10"
     `maven-publish`
-    signing
 }
 
 group = "vorobeij"
@@ -10,6 +9,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+java {
+    withSourcesJar()
+    // and/or analogously use “withJavadocJar()” to get a “javadocJar” task
 }
 
 dependencies {
@@ -35,8 +39,4 @@ publishing {
             from(components["java"])
         }
     }
-}
-
-signing {
-    sign(publishing.publications["maven"])
 }

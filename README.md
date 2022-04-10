@@ -6,7 +6,7 @@ YahooFinance(cache = MemoryNetworkCache())
 // Use file cache
 val yf = YahooFinance()
 
-println(yf.earningsTrend("AAPL"))
+println(yf.earningsTrend("AAPL", refresh = true))
 ```
 
 # Gradle

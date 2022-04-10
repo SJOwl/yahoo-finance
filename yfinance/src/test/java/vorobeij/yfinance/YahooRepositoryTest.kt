@@ -5,7 +5,7 @@ import org.junit.Test
 
 class YahooRepositoryTest {
 
-    private val ticker: String = "AMZN"
+    private val ticker: String = "JNJ"
 
     private val yahooFinance = YahooFinance()
 
