@@ -1,4 +1,4 @@
-package vorobeij.yfinance.data
+package vorobeij.yfinance
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -603,6 +603,7 @@ import kotlinx.serialization.Serializable
     @SerialName("name") val name: String? = null,
     @SerialName("positionDirect") val positionDirect: DataEntry? = null,
     @SerialName("positionDirectDate") val positionDirectDate: DataEntry? = null,
+    @SerialName("positionSummaryDate") val positionSummaryDate: DataEntry? = null,
     @SerialName("positionIndirect") val positionIndirect: DataEntry? = null,
     @SerialName("positionIndirectDate") val positionIndirectDate: DataEntry? = null,
     @SerialName("relation") val relation: String? = null,

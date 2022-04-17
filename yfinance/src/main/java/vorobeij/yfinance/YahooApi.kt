@@ -1,10 +1,22 @@
 package vorobeij.yfinance
 
+import okhttp3.ResponseBody
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
-import vorobeij.yfinance.data.QuoteSummaryResponse
+import retrofit2.http.Query
 
 internal interface YahooApi {
+
+    @GET("https://query1.finance.yahoo.com/v7/finance/download/{ticker}")
+    suspend fun getHistoryQuotes(
+        @Header("Cookie") token: String,
+        @Path("ticker") ticker: String,
+        @Query("period1") period1: Long,
+        @Query("period2") period2: Long,
+        @Query("interval") interval: String,
+        @Query("crumb") crumb: String
+    ): ResponseBody
 
     @GET("quoteSummary/{ticker}?modules=assetProfile,balanceSheetHistory,balanceSheetHistoryQuarterly,calendarEvents,cashflowStatementHistory,cashflowStatementHistoryQuarterly,defaultKeyStatistics,earnings,earningsHistory,earningsTrend,financialData,fundOwnership,incomeStatementHistory,incomeStatementHistoryQuarterly,indexTrend,industryTrend,insiderHolders,insiderTransactions,institutionOwnership,majorDirectHolders,majorHoldersBreakdown,netSharePurchaseActivity,price,quoteType,recommendationTrend,secFilings,sectorTrend,summaryDetail,summaryProfile,symbol,upgradeDowngradeHistory,fundProfile,topHoldings,fundPerformance")
     suspend fun quoteSummary(@Path("ticker") ticker: String): QuoteSummaryResponse

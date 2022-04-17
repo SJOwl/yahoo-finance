@@ -1,34 +1,12 @@
 package vorobeij.yfinance
 
-import vorobeij.yfinance.data.AssetProfile
-import vorobeij.yfinance.data.BalanceSheetHistory
-import vorobeij.yfinance.data.CalendarEvents
-import vorobeij.yfinance.data.CashflowStatementHistory
-import vorobeij.yfinance.data.DefaultKeyStatistics
-import vorobeij.yfinance.data.EarningsHistory
-import vorobeij.yfinance.data.EarningsOverview
-import vorobeij.yfinance.data.EarningsTrend
-import vorobeij.yfinance.data.FinancialData
-import vorobeij.yfinance.data.FundOwnership
-import vorobeij.yfinance.data.IncomeStatementHistory
-import vorobeij.yfinance.data.IndexTrend
-import vorobeij.yfinance.data.InsiderHolders
-import vorobeij.yfinance.data.InsiderTransactions
-import vorobeij.yfinance.data.InstitutionOwnership
-import vorobeij.yfinance.data.MajorDirectHolders
-import vorobeij.yfinance.data.MajorHoldersBreakdown
-import vorobeij.yfinance.data.NetSharePurchaseActivity
-import vorobeij.yfinance.data.Price
-import vorobeij.yfinance.data.QuoteType
-import vorobeij.yfinance.data.RecommendationTrend
-import vorobeij.yfinance.data.SecFilings
-import vorobeij.yfinance.data.Summary
-import vorobeij.yfinance.data.SummaryDetail
-import vorobeij.yfinance.data.UpgradeDowngradeHistory
+import java.util.Calendar
 
 internal interface YahooFinanceApi {
 
-    suspend fun quoteSummary(ticker: String, refresh: Boolean = true): Summary
+    suspend fun historicalQuotes(ticker: String, from: Calendar, to: Calendar, interval: QueryInterval, refresh: Boolean = false): List<HistoricalQuote>
+
+    suspend fun quoteSummary(ticker: String, refresh: Boolean = false): Summary
 
     suspend fun assetProfile(ticker: String, refresh: Boolean = false): AssetProfile
 

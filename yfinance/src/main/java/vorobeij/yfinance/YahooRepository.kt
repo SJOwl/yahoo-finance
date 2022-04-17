@@ -4,36 +4,27 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import vorobeij.yfinance.cache.NetworkCache
-import vorobeij.yfinance.data.AssetProfile
-import vorobeij.yfinance.data.BalanceSheetHistory
-import vorobeij.yfinance.data.CalendarEvents
-import vorobeij.yfinance.data.CashflowStatementHistory
-import vorobeij.yfinance.data.DefaultKeyStatistics
-import vorobeij.yfinance.data.EarningsHistory
-import vorobeij.yfinance.data.EarningsOverview
-import vorobeij.yfinance.data.EarningsTrend
-import vorobeij.yfinance.data.FinancialData
-import vorobeij.yfinance.data.FundOwnership
-import vorobeij.yfinance.data.IncomeStatementHistory
-import vorobeij.yfinance.data.IndexTrend
-import vorobeij.yfinance.data.InsiderHolders
-import vorobeij.yfinance.data.InsiderTransactions
-import vorobeij.yfinance.data.InstitutionOwnership
-import vorobeij.yfinance.data.MajorDirectHolders
-import vorobeij.yfinance.data.MajorHoldersBreakdown
-import vorobeij.yfinance.data.NetSharePurchaseActivity
-import vorobeij.yfinance.data.Price
-import vorobeij.yfinance.data.QuoteType
-import vorobeij.yfinance.data.RecommendationTrend
-import vorobeij.yfinance.data.SecFilings
-import vorobeij.yfinance.data.Summary
-import vorobeij.yfinance.data.SummaryDetail
-import vorobeij.yfinance.data.UpgradeDowngradeHistory
+import vorobeij.yfinance.utils.CrumbManager
+import vorobeij.yfinance.utils.QuotesCsvParser
+import java.util.Calendar
 
 internal class YahooRepository(
     private val api: YahooApi,
     private val cache: NetworkCache
 ) : YahooFinanceApi {
+
+    private val quotesCsvParser = QuotesCsvParser()
+
+    init {
+        CrumbManager.refresh()
+    }
+
+    override suspend fun historicalQuotes(ticker: String, from: Calendar, to: Calendar, interval: QueryInterval, refresh: Boolean): List<HistoricalQuote> {
+        val csv = getData<String>("$ticker-historicalQuotes-${from.timeInMillis}-${to.timeInMillis}-$interval", refresh) {
+            api.getHistoryQuotes(CrumbManager.getCookie(), ticker, from.timeInMillis / 1000, to.timeInMillis / 1000, interval.tag, CrumbManager.getCrumb()).string()
+        }
+        return quotesCsvParser.parseCsv(ticker, csv)
+    }
 
     override suspend fun quoteSummary(ticker: String, refresh: Boolean): Summary {
         return getData("$ticker-quoteSummary", refresh) {
