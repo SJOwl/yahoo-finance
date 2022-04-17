@@ -43,7 +43,9 @@ import kotlinx.serialization.Serializable
     @SerialName("summaryDetail") val summaryDetail: SummaryDetail? = null,
     @SerialName("summaryProfile") val summaryProfile: AssetProfile? = null,
     @SerialName("upgradeDowngradeHistory") val upgradeDowngradeHistory: UpgradeDowngradeHistory? = null
-)
+) {
+    val ticker: String? get() = price?.symbol ?: quoteType?.symbol
+}
 
 @Serializable data class AssetProfile(
     @SerialName("address1") val address1: String? = null,
