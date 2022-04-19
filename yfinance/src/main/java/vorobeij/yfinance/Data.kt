@@ -50,6 +50,7 @@ import kotlinx.serialization.Serializable
 @Serializable data class AssetProfile(
     @SerialName("address1") val address1: String? = null,
     @SerialName("address2") val address2: String? = null,
+    @SerialName("industrySymbol") val industrySymbol: String? = null,
     @SerialName("fax") val fax: String? = null,
     @SerialName("auditRisk") val auditRisk: Int? = null,
     @SerialName("boardRisk") val boardRisk: Int? = null,
@@ -291,7 +292,9 @@ import kotlinx.serialization.Serializable
     @SerialName("marketCap") val marketCap: DataEntry? = null,
     @SerialName("marketState") val marketState: String? = null,
     @SerialName("maxAge") val maxAge: Int,
+    @SerialName("preMarketTime") val preMarketTime: Long? = null,
     @SerialName("openInterest") val openInterest: DataEntry? = null,
+    @SerialName("preMarketChangePercent") val preMarketChangePercent: DataEntry? = null,
     @SerialName("postMarketChange") val postMarketChange: DataEntry? = null,
     @SerialName("postMarketChangePercent") val postMarketChangePercent: DataEntry? = null,
     @SerialName("postMarketPrice") val postMarketPrice: DataEntry? = null,

@@ -2,7 +2,7 @@ package vorobeij.yfinance.cache
 
 import java.io.File
 
-class NetworkFileCache : NetworkCache {
+class FileNetworkCache : NetworkCache {
 
     private val root = "./cache"
 

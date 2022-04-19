@@ -5,7 +5,7 @@ import org.junit.Test
 import java.util.Calendar
 import java.util.Date
 
-private val tickers = listOf("SQ", "AAPL", "AMZN")
+private val tickers = listOf("CRM", "AAPL", "AMZN")
 private val yahooFinance = YahooFinance()
 
 class YahooRepositoryTest {

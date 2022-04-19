@@ -7,8 +7,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.create
+import vorobeij.yfinance.cache.FileNetworkCache
 import vorobeij.yfinance.cache.NetworkCache
-import vorobeij.yfinance.cache.NetworkFileCache
 
 private const val BASE_URL = "https://query2.finance.yahoo.com/v10/finance/"
 
@@ -27,5 +27,5 @@ private val retrofit = Retrofit.Builder()
 private val api = retrofit.create<YahooApi>()
 
 class YahooFinance(
-    cache: NetworkCache = NetworkFileCache()
+    cache: NetworkCache = FileNetworkCache()
 ) : YahooFinanceApi by YahooRepository(api, cache)
