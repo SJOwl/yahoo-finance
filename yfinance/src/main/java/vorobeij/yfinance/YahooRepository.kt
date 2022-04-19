@@ -3,6 +3,7 @@ package vorobeij.yfinance
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import vorobeij.yfinance.cache.MemoryObjectCache
 import vorobeij.yfinance.cache.NetworkCache
 import vorobeij.yfinance.utils.CrumbManager
 import vorobeij.yfinance.utils.QuotesCsvParser
@@ -12,6 +13,8 @@ internal class YahooRepository(
     private val api: YahooApi,
     private val cache: NetworkCache
 ) : YahooFinanceApi {
+
+    private val memoryObjectCache = MemoryObjectCache()
 
     private val quotesCsvParser = QuotesCsvParser()
 
@@ -204,15 +207,18 @@ internal class YahooRepository(
         }
     }
 
-    private inline fun <reified T> getData(key: String, refresh: Boolean, fetch: () -> T): T {
+    private inline fun <reified T : Any> getData(key: String, refresh: Boolean, fetch: () -> T): T {
         return if (refresh) {
             fetch.invoke().also {
+                memoryObjectCache.saveObject(key, it)
                 cache.saveJsonString(key, Json.encodeToString(it))
             }
         } else {
-            cache.getJsonString(key)
-                ?.let { Json.decodeFromString(it) }
+            memoryObjectCache.getObject(key) as? T
+                ?: cache.getJsonString(key)
+                    ?.let { Json.decodeFromString(it) }
                 ?: fetch.invoke().also {
+                    memoryObjectCache.saveObject(key, it)
                     cache.saveJsonString(key, Json.encodeToString(it))
                 }
         }
