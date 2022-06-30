@@ -1,8 +1,5 @@
 package vorobeij.yfinance.cache
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
-
 class CompositeCache(
     private val caches: Collection<NetworkCache>
 ) : NetworkCache {
@@ -10,7 +7,6 @@ class CompositeCache(
     override fun getJsonString(key: String): String? {
         return caches
             .firstNotNullOfOrNull { it.getJsonString(key) }
-            ?.let { Json.decodeFromString(it) }
     }
 
     override fun saveJsonString(key: String, json: String) {
