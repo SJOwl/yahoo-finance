@@ -16,10 +16,11 @@ class FileNetworkCache : NetworkCache {
     }
 
     override fun saveJsonString(key: String, json: String) {
-        file(key).writeText(json)
+        val f = file(key)
+        f.writeText(json.trim('"'))
     }
 
     private fun file(key: String): File {
-        return File(root, "$key.json")
+        return File(root, key)
     }
 }

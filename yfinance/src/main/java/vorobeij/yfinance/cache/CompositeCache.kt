@@ -4,19 +4,17 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 class CompositeCache(
-    private val cacheFirst: NetworkCache,
-    private val cacheSecond: NetworkCache?
+    private val caches: Collection<NetworkCache>
 ) : NetworkCache {
 
     override fun getJsonString(key: String): String? {
-        return cacheFirst.getJsonString(key)
+        return caches
+            .firstNotNullOfOrNull { it.getJsonString(key) }
             ?.let { Json.decodeFromString(it) }
-            ?: cacheSecond?.getJsonString(key)
     }
 
     override fun saveJsonString(key: String, json: String) {
-        cacheSecond?.saveJsonString(key, json)
-        cacheFirst.saveJsonString(key, json)
+        caches.forEach { it.saveJsonString(key, json) }
     }
 
 }

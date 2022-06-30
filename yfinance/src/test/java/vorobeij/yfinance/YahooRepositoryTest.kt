@@ -2,15 +2,24 @@ package vorobeij.yfinance
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
-private val tickers = listOf("CRM", "AAPL", "AMZN")
+private val tickers = listOf(
+    "MMM",
+    "AOS",
+    "ABT",
+    "ABBV",
+    "ABMD",
+    "ACN",
+    "ATVI"
+)
+
 private val yahooFinance = YahooFinance()
 
 class YahooRepositoryTest {
 
-    @Test fun historicalQuotes() {
+    @Test
+    fun historicalQuotes() {
         runBlocking {
             tickers.forEach { ticker ->
                 println(
@@ -18,7 +27,7 @@ class YahooRepositoryTest {
                         ticker,
                         Calendar.getInstance().apply {
                             time = Date(0, 0, 0, 0, 0, 0)
-                            set(2000, 0, 1)
+                            set(2016, 0, 1)
                         },
                         Calendar.getInstance().apply {
                             time = Date(0, 0, 0, 0, 0, 0)
