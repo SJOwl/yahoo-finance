@@ -251,7 +251,7 @@ import kotlinx.serialization.Serializable
 )
 
 @Serializable data class MajorDirectHolders(
-    @SerialName("holders") val holders: List<String>, @SerialName("maxAge") val maxAge: Int
+    @SerialName("holders") val holders: List<Holder>, @SerialName("maxAge") val maxAge: Int
 )
 
 @Serializable data class MajorHoldersBreakdown(
